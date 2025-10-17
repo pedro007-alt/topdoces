@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍭 Top Doces - O melhor da região 🍬</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #fff3f7, #ffe4ec);
+      color: #333;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      background: linear-gradient(90deg, #ff6fa7, #ff4081);
+      color: white;
+      text-align: center;
+      padding: 40px 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+    header h1 {
+      font-size: 2.6em;
+      margin: 0;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    header p {
+      font-size: 1.2em;
+      margin: 10px 0 0;
+      font-style: italic;
+    }
+
+    nav {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 15px 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 0 0 20px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      text-decoration: none;
+      color: #ff4081;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all 0.3s;
+    }
+    nav a:hover {
+      color: #ff6fa7;
+      transform: scale(1.1);
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      padding: 50px 30px;
+    }
+
+    .produto {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .produto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+
+    .produto img {
+      width: 100%;
+      height: 220px;
+      border-radius: 15px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .produto:hover img {
+      transform: scale(1.08);
+    }
+
+    .produto h3 {
+      margin: 15px 0 5px;
+      color: #ff4081;
+      font-size: 1.3em;
+    }
+    .produto p {
+      margin: 0;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .btn-carrinho {
+      margin-top: 12px;
+      background: linear-gradient(90deg, #ff4081, #ff6fa7);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-carrinho:hover {
+      background: linear-gradient(90deg, #ff6fa7, #ff4081);
+      transform: scale(1.05);
+    }
+
+    .carrinho {
+      background: #fff;
+      border-top: 5px solid #ffb6c1;
+      border-radius: 25px 25px 0 0;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+    }
+
+    .carrinho h2 {
+      color: #ff4081;
+      margin-bottom: 10px;
+    }
+
+    #itens-carrinho {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+    #itens-carrinho li {
+      margin: 8px 0;
+      font-weight: 500;
+      background: #ffe4ec;
+      padding: 6px 12px;
+      border-radius: 10px;
+    }
+
+    .form-pedido {
+      margin-top: 20px;
+      text-align: left;
+      display: inline-block;
+      background: #fffafc;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .form-pedido label {
+      display: block;
+      margin-top: 10px;
+      color: #ff4081;
+      font-weight: bold;
+    }
+
+    .form-pedido input, .form-pedido select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ffb6c1;
+      border-radius: 10px;
+      outline: none;
+      margin-top: 5px;
+      transition: border 0.3s;
+    }
+
+    .form-pedido input:focus, .form-pedido select:focus {
+      border-color: #ff4081;
+    }
+
+    footer {
+      background: linear-gradient(90deg, #ff6fa7, #ff4081);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      margin-top: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Botão flutuante */
+    .whatsapp {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+    .whatsapp:hover {
+      transform: scale(1.15);
+    }
+
+    .menu-whatsapp {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      right: 35px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 10px;
+      z-index: 1000;
+      text-align: left;
+      animation: fadeIn 0.4s ease-in;
+    }
+
+    .menu-whatsapp a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .menu-whatsapp a:hover {
+      background-color: #ffebf1;
+      color: #ff4081;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2em; }
+      .produto img { height: 180px; }
+      .btn-carrinho { padding: 8px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🍭 Top Doces 🍬</h1>
+    <p>O sabor que adoça a sua vida!</p>
+  </header>
+
+  <nav>
+    <a href="#produtos">Produtos</a>
+    <a href="#carrinho">Carrinho</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <!-- SEÇÃO DE PRODUTOS -->
+  <section id="produtos" class="produtos">
+    <div class="produto">
+      <img src="https://images.unsplash.com/photo-1587758899596-cd1c78b9bffb?auto=format&fit=crop&w=600&q=80" alt="Pão de Mel">
+      <h3>Pão de Mel</h3>
+      <p>R$ 4,00</p>
+      <button class="btn-carrinho" onclick="adicionarAoCarrinho('Pão de Mel', 4.00)">Adicionar</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://images.unsplash.com/photo-1601315576609-6c1a3a4c40d1?auto=format&fit=crop&w=600&q=80" alt="Cone Trufado">
+      <h3>Cone Trufado</h3>
+      <p>R$ 10,00</p>
+      <button class="btn-carrinho" onclick="adicionarAoCarrinho('Cone Trufado', 10.00)">Adicionar</button>
+    </div>
+  </section>
+
+  <!-- CARRINHO -->
+  <section id="carrinho" class="carrinho">
+    <h2>🛒 Seu Carrinho</h2>
+    <ul id="itens-carrinho"></ul>
+    <p><strong>Total:</strong> R$ <span id="total">0.00</span></p>
+
+    <form class="form-pedido" id="form-pedido">
+      <label>Tipo de entrega:</label>
+      <select id="tipoEntrega" required>
+        <option value="">Selecione...</option>
+        <option value="delivery">Delivery</option>
+        <option value="retirada">Retirada no local</option>
+      </select>
+
+      <div id="enderecoCampo" style="display:none;">
+        <label>Endereço para entrega:</label>
+        <input type="text" id="endereco" placeholder="Rua, número, bairro..." />
+      </div>
+
+      <div id="retiradaCampo" style="display:none; margin-top:10px; background:#fff; padding:10px; border-radius:10px;">
+        <strong>📍 Retirada:</strong><br>
+        Rua José Troncoso, Bairro Alto, nº 131
+      </div>
+
+      <label>Forma de pagamento:</label>
+      <select id="pagamento" required>
+        <option value="">Selecione...</option>
+        <option value="Pix">Pix</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão">Cartão</option>
+      </select>
+
+      <div id="trocoCampo" style="display:none;">
+        <label>Troco para quanto?</label>
+        <input type="number" id="troco" placeholder="Ex: 50,00" min="0" step="0.01" />
+      </div>
+    </form>
+
+    <button class="btn-carrinho" onclick="enviarWhatsApp()">📲 Finalizar Pedido</button>
+    <button class="btn-carrinho" onclick="limparCarrinho()">🧹 Esvaziar</button>
+
+    <p style="margin-top:20px;">
+      <strong>📞 Pedro:</strong> (18) 99681-3217 | <strong>Lucas:</strong> (18) 97602-3705<br>
+      <strong>💳 Pix:</strong> 18 97602 3705
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 🍬 Top Doces — Feito com amor e açúcar 🍭</p>
+  </footer>
+
+  <div class="whatsapp" id="btnWhatsApp">💬</div>
+  <div class="menu-whatsapp" id="menuWhatsApp">
+    <a href="https://wa.me/5518996813217" target="_blank">📞 Pedro</a>
+    <a href="https://wa.me/5518976023705" target="_blank">📞 Lucas</a>
+  </div>
+
+  <script>
+    let total = 0;
+    const itensCarrinho = [];
+
+    function adicionarAoCarrinho(nome, preco) {
+      itensCarrinho.push({ nome, preco });
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const lista = document.getElementById('itens-carrinho');
+      const totalEl = document.getElementById('total');
+      lista.innerHTML = '';
+      total = 0;
+      itensCarrinho.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+        lista.appendChild(li);
+        total += item.preco;
+      });
+      totalEl.textContent = total.toFixed(2);
+    }
+
+    function limparCarrinho() {
+      itensCarrinho.length = 0;
+      atualizarCarrinho();
+    }
+
+    function enviarWhatsApp() {
+      if (itensCarrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+      }
+
+      const tipoEntrega = document.getElementById('tipoEntrega').value;
+      const endereco = document.getElementById('endereco').value;
+      const pagamento = document.getElementById('pagamento').value;
+      const troco = document.getElementById('troco').value;
+
+      if (!tipoEntrega || !pagamento) {
+        alert("Preencha as opções de entrega e pagamento!");
+        return;
+      }
+
+      let mensagem = "🍭 *Pedido - Top Doces* 🍬%0A%0A";
+      itensCarrinho.forEach(item => {
+        mensagem += `• ${item.nome} - R$ ${item.preco.toFixed(2)}%0A`;
+      });
+      mensagem += `%0A*Total:* R$ ${total.toFixed(2)}%0A`;
+      mensagem += `%0A📦 *Entrega:* ${tipoEntrega}`;
+      if (tipoEntrega === "delivery") mensagem += `%0A🏠 *Endereço:* ${endereco}`;
+      if (tipoEntrega === "retirada") mensagem += `%0A📍 *Retirada:* Rua José Troncoso, Bairro Alto, nº 131`;
+      mensagem += `%0A💳 *Pagamento:* ${pagamento}`;
+      if (pagamento === "Pix") mensagem += `%0A🔑 *Chave Pix:* 18 97602 3705`;
+      if (pagamento === "Dinheiro" && troco) mensagem += `%0A💰 *Troco para:* R$ ${parseFloat(troco).toFixed(2)}`;
+      mensagem += `%0A%0AObrigado pelo pedido! 💖`;
+
+      const numero = prompt("Digite 1 para enviar para Pedro (18) 99681-3217 ou 2 para Lucas (18) 97602-3705:");
+      let numeroWhats = "";
+      if (numero === "1") numeroWhats = "5518996813217";
+      else if (numero === "2") numeroWhats = "5518976023705";
+      else { alert("Opção inválida."); return; }
+
+      const link = `https://wa.me/${numeroWhats}?text=${mensagem}`;
+      window.open(link, "_blank");
+    }
+
+    document.getElementById("tipoEntrega").addEventListener("change", function() {
+      document.getElementById("enderecoCampo").style.display = this.value === "delivery" ? "block" : "none";
+      document.getElementById("retiradaCampo").style.display = this.value === "retirada" ? "block" : "none";
+    });
+
+    document.getElementById("pagamento").addEventListener("change", function() {
+      document.getElementById("trocoCampo").style.display = this.value === "Dinheiro" ? "block" : "none";
+    });
+
+    const btnWhatsApp = document.getElementById("btnWhatsApp");
+    const menuWhatsApp = document.getElementById("menuWhatsApp");
+    btnWhatsApp.addEventListener("click", () => {
+      menuWhatsApp.style.display = menuWhatsApp.style.display === "block" ? "none" : "block";
+    });
+    document.addEventListener("click", (e) => {
+      if (!btnWhatsApp.contains(e.target) && !menuWhatsApp.contains(e.target)) {
+        menuWhatsApp.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
